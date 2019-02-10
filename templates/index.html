@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Places to Live</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <!-- Leaflet JS & CSS -->
+  
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+  integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+  crossorigin=""/>
+ 
+
+   <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+  integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+  crossorigin=""></script>
+
+  <!-- Leaflet Shapefile -->
+
+  <script src="../static/js/catiline.js"></script>
+	<script src="../static/js/leaflet.shpfile.js"></script>
+
+  <!-- d3 JavaScript -->
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+ <!-- Our CSS -->
+ <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+
+
+
+</head>
+
+<body>
+  
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 jumbotron text-center">
+        <h1>Compare two places to live</h1>
+        <p>Use the interactive maps below to compare two locations</p>
+      </div>
+    </div>
+    <div class="row" >
+      <div class="col-xs-6">
+        <div id="map1" ></div>
+      </div>
+      <div class="col-xs-6">
+        <div id="map2" ></div>
+      </div>
+      
+    </div>
+    <div class="row" >
+        <div class="col-xs-6">
+         
+        </div>
+        <div class="col-xs-6">
+          
+        </div>
+        
+      </div>
+  
+</div>
+  <!-- <script src="https://cdn.plot.ly/plotly-1.31.2.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<!--  <script src="{{ url_for('static', filename='js/config.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/logic.js') }}"></script> -->
+  <script src="../static/js/config.js"></script>
+  <script src="../static/js/logic.js"></script>
+
+
+</body>
+
+</html>
