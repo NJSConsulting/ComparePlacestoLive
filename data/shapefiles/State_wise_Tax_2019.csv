@@ -1,0 +1,52 @@
+﻿Name,Abbreviation,TaxRate
+Alabama,al,3.67
+Alaska,ak,0.00
+Arizona,az,3.52
+Arkansas,ar,4.05
+California,ca,7.75
+Colorado,co,4.63
+Connecticut,ct,5.70
+Delaware,de,4.71
+Washington DC,dc,7.12
+Florida,fl,0.00
+Georgia,ga,3.50
+Hawaii,hi,6.03
+Idaho,id,5.00
+Illinois,il,3.75
+Indiana,in,3.30
+Iowa,ia,4.92
+Kansas,ks,4.33
+Kentucky,ky,4.30
+Louisiana,la,2.02
+Maine,me,6.57
+Maryland,md,4.41
+Massachusetts,ma,5.10
+Michigan,mi,4.25
+Minnesota,mn,7.53
+Mississippi,ms,4.00
+Missouri,mo,3.75
+Montana,mt,3.99
+Nebraska,ne,4.46
+Nevada,nv,0.00
+New Hampshire,nh,5.00
+New Jersey,nj,4.42
+New Mexico,nm,3.63
+New York,ny,6.05
+North Carolina,nc,5.75
+North Dakota,nd,2.19
+Ohio,oh,2.88
+Oklahoma,ok,2.58
+Oregon,or,7.73
+Pennsylvania,pa,3.07
+Rhode Island,ri,4.83
+South Carolina,sc,4.17
+South Dakota,sd,0.00
+Tennessee,tn,5.00
+Texas,tx,0.00
+Utah,ut,5.00
+Vermont,vt,7.18
+Virginia,va,3.94
+Washington,wa,0.00
+West Virginia,wv,4.80
+Wisconsin,wi,5.94
+Wyoming,wy,0.00
