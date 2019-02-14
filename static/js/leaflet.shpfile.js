@@ -3,7 +3,8 @@
 /* global cw, shp */
 L.Shapefile = L.GeoJSON.extend({
   options: {
-    importUrl: '../static/js/shp.js'
+    importUrl: './shp'
+    //importUrl: './static/js/shp.js'
   },
 
   initialize: function(file, options) {
