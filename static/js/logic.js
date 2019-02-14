@@ -156,6 +156,22 @@ myMap2.on('baselayerchange', d => {
 
 })
 
+
+myMap1.on('baselayerchange', d => {
+    console.log('in layer change')
+    if (d.name==='Congress'){
+        console.log('Congress')
+        myMap2.addLayer(shpfilecong2)
+        myMap2.removeLayer(shpfile2)
+    }
+    else {
+        console.log('<> Congress')
+        myMap2.addLayer(shpfile2)
+        myMap2.removeLayer(shpfilecong2)
+    }
+
+})
+
 console.log(clayer2.getOverlays())
 
 shpfile.once("data:loaded", function() {
