@@ -15,6 +15,30 @@ var myMap2 = L.map("map2", {
    });
 
 
+   L.Control.Layers.include({
+    getOverlays: function() {
+      // create hash to hold all layers
+      var control, layers;
+      layers = {};
+      control = this;
+  
+      // loop thru all layers in control
+      control._layers.forEach(function(obj) {
+        var layerName;
+  
+        // check if layer is an overlay
+        if (obj.overlay) {
+          // get name of overlay
+          layerName = obj.name;
+          // store whether it's present on the map or not
+          return layers[layerName] = control._map.hasLayer(obj.layer);
+        }
+      });
+  
+      return layers;
+    }
+  });
+
  L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
   attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
   maxZoom: 18,
@@ -26,7 +50,7 @@ var myMap2 = L.map("map2", {
 
 console.log ('starting shape file')
 
-var shpfile = new L.Shapefile('../data/shapefiles/cb_2017_us_state_20m.zip', {
+var shpfile = new L.Shapefile('./static/data/shapefiles/cb_2017_us_state_20m.zip', {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
             layer.bindPopup(Object.keys(feature.properties).map(function(k) {
@@ -38,14 +62,15 @@ var shpfile = new L.Shapefile('../data/shapefiles/cb_2017_us_state_20m.zip', {
     }
 });
 shpfile.addTo(myMap1);
-var shpfilecong = new L.Shapefile('../data/shapefiles/cb_2017_us_cd115_500k.zip', {
+var shpfilecong = new L.Shapefile('./static/data/shapefiles/cb_2017_us_cd115_500k.zip', {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
-            layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+           layer.bindPopup(Object.keys(feature.properties).map(function(k) {
                 return k + ": " + feature.properties[k];
             }).join("<br />"), {
                 maxHeight: 200
-            });
+            })
+           
         }
     }
 });
@@ -55,31 +80,30 @@ var overlayMaps1 = {
     Congress: shpfilecong
   };
 
- var clayer1 =  L.control.layers(null, overlayMaps1).addTo(myMap1);
+ var clayer1 =  L.control.layers(overlayMaps1,null ).addTo(myMap1);
 
+//Object.keys(feature.properties).map(function(k) {    return k + ": " + feature.properties[k];} ).join("<br />" 
 
-
-var shpfile2 = new L.Shapefile('../data/shapefiles/cb_2017_us_state_20m.zip', {
+var shpfile2 = new L.Shapefile('./static/data/shapefiles/cb_2017_us_state_20m.zip', {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
-            layer.bindPopup(Object.keys(feature.properties).map(function(k) {
-                return k + ": " + feature.properties[k];
-            }).join("<br />"), {
+            layer.bindPopup('<a class="selectstate">SELNICK</a><br>'), {
                 maxHeight: 200
-            });
+            }
         }
     }
 });
 shpfile2.addTo(myMap2);
 
-var shpfilecong2 = new L.Shapefile('../data/shapefiles/cb_2017_us_cd115_500k.zip', {
+var shpfilecong2 = new L.Shapefile('./static/data/shapefiles/cb_2017_us_cd115_500k.zip', {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
             layer.bindPopup(Object.keys(feature.properties).map(function(k) {
                 return k + ": " + feature.properties[k];
-            }).join("<br />"), {
+            }).join("<br />") , {
                 maxHeight: 200
             });
+     
         }
     }
 });
@@ -91,11 +115,48 @@ var overlayMaps2 = {
   };
 
 
+var clayer2 = new L.control.layers(overlayMaps2, null).addTo(myMap2);
 
-var clayer2 = L.control.layers(null, overlayMaps2).addTo(myMap2);
-clayer2.on('changed',_ => {
-    console.log('clayer2changed')
+var selectedlayers2 = clayer2.getOverlays()
+/* d3.select('#map2').select('.leaflet-control-layers-overlays')
+.selectAll('.leaflet-control-layers-toggle')
+.on('change', _d => {
+    console.log(selectedlayers2)
+   if (selectedlayers2.States) {
+    if (clayer2.getOverlays().Congress) {
+        console.log('in congresschecked')
+        shpfile2.removeFrom(myMap2)
+        selectedlayers2 = clayer2.getOverlays()
+    }
+
+   }
+   else
+   {
+    if (clayer2.getOverlays().States) {
+        console.log('in statechecked')
+        shpfilecong2.removeFrom(myMap2)
+        selectedlayers2 = clayer2.getOverlays()
+    }
+   }
+   console.log(selectedlayers2)
+})*/
+
+myMap2.on('baselayerchange', d => {
+    console.log('in layer change')
+    if (d.name==='Congress'){
+        console.log('Congress')
+        myMap1.addLayer(shpfilecong)
+        myMap1.removeLayer(shpfile)
+    }
+    else {
+        console.log('<> Congress')
+        myMap1.addLayer(shpfile)
+        myMap1.removeLayer(shpfilecong)
+    }
+
 })
+
+console.log(clayer2.getOverlays())
 
 shpfile.once("data:loaded", function() {
     console.log("finished loaded shapefile");
@@ -105,5 +166,7 @@ shpfile2.once("data:loaded", function() {
     console.log("finished loaded shapefile");
 });
 
-
+d3.select('#map2').on('click', '.selectstate', d=>{
+    console.log('arrow')
+})
 console.log ('done')

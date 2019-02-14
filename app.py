@@ -11,10 +11,12 @@ from sqlalchemy import create_engine
 
 from flask import Flask, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
+from flask import Response
 
 app = Flask(__name__)
 
-
+jsfile = file = open('./templates/shp.js', 'r   ')
+myjs = jsfile.read()
 df = pd.read_csv("data/shapefiles/State_wise_Tax_2019.csv")
 
 
@@ -23,6 +25,9 @@ df = pd.read_csv("data/shapefiles/State_wise_Tax_2019.csv")
 #################################################
 
 
+@app.route('/shp')
+def ajax_ddl():
+      return Response(myjs, mimetype='text/javascript')
 
 @app.route("/")
 def index():
