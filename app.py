@@ -15,7 +15,7 @@ from flask import Response
 
 app = Flask(__name__)
 
-jsfile = file = open('./templates/shp.js', 'r   ')
+jsfile = file = open('./templates/shp.js', 'r')
 myjs = jsfile.read()
 df = pd.read_csv("data/shapefiles/State_wise_Tax_2019.csv")
 
