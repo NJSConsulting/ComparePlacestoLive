@@ -32,12 +32,19 @@ def index():
 @app.route("/<state>")
 def statename(state):
     print(type(state)) 
-    sample_data = df.loc[df['Abbreviation'] == state, ["Name", "Abbreviation", "TaxRate"]]
+    sample_data = df.loc[df['Abbreviation'] == state, ["Name", "Abbreviation", "TaxRate", "State_Tax","Fed_Tax","Social_Tax","Med_Tax",
+"Total_Tax_Ded","Total_Take_Home"]]
     print(sample_data)
     data = {
        #"Name": sample_data.Name.values.tolist(),
        #"Abbreviation": sample_data.Abbreviation.values.tolist(),
-       "TaxRate": sample_data.TaxRate.tolist(),
+    #    "State TaxRate": sample_data.TaxRate.tolist(),
+       "Federal tax for 100K"        : sample_data.Fed_Tax.tolist(),
+       "Medicare Witheld for 100K"   : sample_data.Med_Tax.tolist(),
+       "State tax for 100K"          : sample_data.State_Tax.tolist(),
+       "Social Security tax for 100K": sample_data.Social_Tax.tolist(),
+       "Total tax for 100K USD"      : sample_data.Total_Tax_Ded.tolist(),
+       "Take Home for 100K USD"      : sample_data.Total_Take_Home.tolist()
    }
     return jsonify(data)
 
