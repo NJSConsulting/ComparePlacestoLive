@@ -166,7 +166,7 @@ shpfile2.once("data:loaded", function() {
     console.log("finished loaded shapefile");
 });
 
-d3.select('#map2').on('click', '.selectstate', d=>{
+/*d3.select('#map2').on('click', '.selectstate', d=>{
     console.log('arrow')
-})
+})*/
 console.log ('done')
