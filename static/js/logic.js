@@ -87,9 +87,11 @@ var overlayMaps1 = {
 var shpfile2 = new L.Shapefile('./static/data/shapefiles/cb_2017_us_state_20m.zip', {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
-            layer.bindPopup('<a class="selectstate">SELNICK</a><br>'), {
+            
+            layer.bindPopup('<div class="selectstate" name="' + feature.properties.STUSPS + '">SELNICK</div><br>'), {
                 maxHeight: 200
             }
+            
         }
     }
 });
@@ -102,7 +104,7 @@ var shpfilecong2 = new L.Shapefile('./static/data/shapefiles/cb_2017_us_cd115_50
                 return k + ": " + feature.properties[k];
             }).join("<br />") , {
                 maxHeight: 200
-            });
+            }).on('click', function() { alert('Clicked on a member of the group!'); })
      
         }
     }
@@ -182,7 +184,9 @@ shpfile2.once("data:loaded", function() {
     console.log("finished loaded shapefile");
 });
 
-/*d3.select('#map2').on('click', '.selectstate', d=>{
-    console.log('arrow')
-})*/
+$('#map2').on('click', '.selectstate', function() {
+   console.log(d3.select(this).attr('name'))
+   buildCharts(d3.select(this).attr('name'))
+  });
+
 console.log ('done')
