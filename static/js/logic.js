@@ -65,6 +65,7 @@ shpfile.addTo(myMap1);
 var shpfilecong = new L.Shapefile('./static/data/shapefiles/cb_2017_us_cd115_500k.zip', {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
+         //   console.log(feature.properties)
            layer.bindPopup(Object.keys(feature.properties).map(function(k) {
                 return k + ": " + feature.properties[k];
             }).join("<br />"), {
@@ -88,7 +89,7 @@ var shpfile2 = new L.Shapefile('./static/data/shapefiles/cb_2017_us_state_20m.zi
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
             
-            layer.bindPopup('<div class="selectstate" name="' + feature.properties.STUSPS + '">SELNICK</div><br>'), {
+            layer.bindPopup('State: ' + feature.properties.NAME + '<br>Land Area: '+Math.floor(100 * feature.properties.ALAND / (feature.properties.ALAND + feature.properties.AWATER))  + '%<br><div class="selectstate" name="' + feature.properties.STUSPS + '">See Charts for this State</div><br>'), {
                 maxHeight: 200
             }
             
@@ -174,7 +175,7 @@ myMap1.on('baselayerchange', d => {
 
 })
 
-console.log(clayer2.getOverlays())
+
 
 shpfile.once("data:loaded", function() {
     console.log("finished loaded shapefile");
@@ -185,8 +186,15 @@ shpfile2.once("data:loaded", function() {
 });
 
 $('#map2').on('click', '.selectstate', function() {
-   console.log(d3.select(this).attr('name'))
-   buildCharts(d3.select(this).attr('name'))
+   
+   buildCharts(d3.select(this).attr('name'), 'pie2')
   });
 
 console.log ('done')
+
+
+function optionChanged(newSample) {
+    // Fetch new data each time a new sample is selected
+  
+  }
+  

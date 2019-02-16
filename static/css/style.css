@@ -20,4 +20,7 @@ body {
     min-width: 100%;
     display: block;
 }
-  
+.selectstate
+{
+    cursor: pointer;
+}
