@@ -89,11 +89,7 @@ var shpfile2 = new L.Shapefile('./static/data/shapefiles/cb_2017_us_state_20m.zi
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
             
-<<<<<<< Updated upstream
             layer.bindPopup('State: ' + feature.properties.NAME + '<br>Land Area: '+Math.floor(100 * feature.properties.ALAND / (feature.properties.ALAND + feature.properties.AWATER))  + '%<br><div class="selectstate" name="' + feature.properties.STUSPS + '">See Charts for this State</div><br>'), {
-=======
-            layer.bindPopup('<div class="selectstate" name="' + feature.properties.STUSPS + '">SELNICK</div><br>'), {
->>>>>>> Stashed changes
                 maxHeight: 200
             }
             
@@ -190,13 +186,8 @@ shpfile2.once("data:loaded", function() {
 });
 
 $('#map2').on('click', '.selectstate', function() {
-<<<<<<< Updated upstream
    
    buildCharts(d3.select(this).attr('name'), 'pie2')
-=======
-   console.log(d3.select(this).attr('name'))
-   buildCharts(d3.select(this).attr('name'))
->>>>>>> Stashed changes
   });
 
 console.log ('done')
