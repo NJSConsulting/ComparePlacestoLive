@@ -65,7 +65,7 @@ shpfile.addTo(myMap1);
 var shpfilecong = new L.Shapefile('./static/data/shapefiles/cb_2017_us_cd115_500k.zip', {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
-            console.log(feature.properties)
+         //   console.log(feature.properties)
            layer.bindPopup(Object.keys(feature.properties).map(function(k) {
                 return k + ": " + feature.properties[k];
             }).join("<br />"), {
@@ -191,3 +191,10 @@ $('#map2').on('click', '.selectstate', function() {
   });
 
 console.log ('done')
+
+
+function optionChanged(newSample) {
+    // Fetch new data each time a new sample is selected
+  
+  }
+  

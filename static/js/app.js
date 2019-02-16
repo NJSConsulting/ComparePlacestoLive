@@ -5,15 +5,15 @@ Plotly.newPlot(updatediv);
     // HINT: You will need to use slice() to grab the top 10 sample_values,
     // otu_ids, and labels (10 each).
     d3.json(url).then(function(data) {  
-      var pie_values = Object.values(data);
+      var pie_values = Object.values(data.data);
       console.log(data)
       console.log(Object.values(data))
-        var pie_labels = Object.keys(data);
+        var pie_labels = Object.keys(data.data);
         console.log(Object.keys(data))
         // var pie_hover = data.otu_labels.slice(0,10);
         var layout = {
           title: {
-            text:'Plot Title'
+            text:data.Title
           }}
 
         var data = [{
