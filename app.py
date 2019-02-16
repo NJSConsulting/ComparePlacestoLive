@@ -36,6 +36,7 @@ def index():
 
 @app.route("/<state>")
 def statename(state):
+    state = state.lower()
     print(type(state)) 
     sample_data = df.loc[df['Abbreviation'] == state, ["Name", "Abbreviation", "TaxRate", "State_Tax","Fed_Tax","Social_Tax","Med_Tax",
 "Total_Tax_Ded","Total_Take_Home"]]
@@ -44,12 +45,12 @@ def statename(state):
        #"Name": sample_data.Name.values.tolist(),
        #"Abbreviation": sample_data.Abbreviation.values.tolist(),
     #    "State TaxRate": sample_data.TaxRate.tolist(),
-       "Federal tax for 100K"        : sample_data.Fed_Tax.tolist(),
-       "Medicare Witheld for 100K"   : sample_data.Med_Tax.tolist(),
-       "State tax for 100K"          : sample_data.State_Tax.tolist(),
-       "Social Security tax for 100K": sample_data.Social_Tax.tolist(),
-       "Total tax for 100K USD"      : sample_data.Total_Tax_Ded.tolist(),
-       "Take Home for 100K USD"      : sample_data.Total_Take_Home.tolist()
+       "Federal tax for 100K"        : sample_data.Fed_Tax.tolist()[0],
+       "Medicare Witheld for 100K"   : sample_data.Med_Tax.tolist()[0],
+       "State tax for 100K"          : sample_data.State_Tax.tolist()[0],
+       "Social Security tax for 100K": sample_data.Social_Tax.tolist()[0],
+    #    "Total tax for 100K USD"      : sample_data.Total_Tax_Ded.tolist()[0],
+       "Take Home for 100K USD"      : sample_data.Total_Take_Home.tolist()[0]
    }
     return jsonify(data)
 
