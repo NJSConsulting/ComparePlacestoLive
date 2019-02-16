@@ -37,16 +37,7 @@
 </head>
 
 <body>
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Dropdown button
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">Action</a>
-      <a class="dropdown-item" href="#">Another action</a>
-      <a class="dropdown-item" href="#">Something else here</a>
-    </div>
-  </div>
+  
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12 jumbotron text-center">
@@ -54,7 +45,7 @@
         <p>Use the interactive maps below to compare two locations</p>
       </div>
     </div>
-    <div class="row" >
+    <div class="row maprow" >
       <div class="col-xs-6">
         <div id="map1" ></div>
       </div>
@@ -67,17 +58,19 @@
       <div class="col-xs-12">
         <div class="well">
           <h5>Select Data Type:</h5>
-          <select id="selDataset" onchange="optionChanged(this.value)">
+          <select id="selDataset" onchange="SelectorChanged(this.value)">
           <option value='Taxes'>Taxes</option>
           <option value='Race'>Race</option>
           <option value='Gender'>Gender</option>
           <option value='Occupation'>Occupation</option>
-          <option value='Employment Sector'>Employment Sector</option>
+          <option value='Sector'>Employment Sector</option>
           </select>
+         
+
         </div>
       </div>
     </div>
-    <div class="row" >
+    <div class="row " >
         <div class="col-xs-6">
           
          <div id='pie'></div>

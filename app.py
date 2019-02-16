@@ -67,7 +67,8 @@ def staterace(state):
 "Asian", "Pacific", "Professional", "Service", "Office", "Construction", "Production", 
 "PrivateWork", "PublicWork", "SelfEmployed", "FamilyWork", "Unemployment"  ]]
     print(sample_data)
-    data = {"title": state + "Popluation by Race",
+    data = {"Title":sample_data.Name.tolist()[0] + " Racial Diversity" ,
+
       "data" : {
        #"Name": sample_data.Name.values.tolist(),
        #"Abbreviation": sample_data.Abbreviation.values.tolist(),
@@ -90,14 +91,15 @@ def stategender(state):
 "Asian", "Pacific", "Professional", "Service", "Office", "Construction", "Production", 
 "PrivateWork", "PublicWork", "SelfEmployed", "FamilyWork", "Unemployment"  ]]
     print(sample_data)
-    data = {
+    data = {"Title":sample_data.Name.tolist()[0] + " Gender Diversity" ,
+    "data":{
        #"Name": sample_data.Name.values.tolist(),
        #"Abbreviation": sample_data.Abbreviation.values.tolist(),
     #    "State TaxRate": sample_data.TaxRate.tolist(),
        "% Men": sample_data.Men.tolist()[0],
        "% Women"  : sample_data.Women.tolist()[0],
 
-
+    }
    }
     return jsonify(data)
 
@@ -110,7 +112,8 @@ def stateoccupation(state):
 "Asian", "Pacific", "Professional", "Service", "Office", "Construction", "Production", 
 "PrivateWork", "PublicWork", "SelfEmployed", "FamilyWork", "Unemployment"  ]]
     print(sample_data)
-    data = {
+    data = {"Title":sample_data.Name.tolist()[0] + " Occupational Diversity" ,
+    "data":{
        #"Name": sample_data.Name.values.tolist(),
        #"Abbreviation": sample_data.Abbreviation.values.tolist(),
     #    "State TaxRate": sample_data.TaxRate.tolist(),
@@ -121,10 +124,10 @@ def stateoccupation(state):
        "% Production"  : sample_data.Production.tolist()[0],
 
 
-
+    }
    }
     return jsonify(data)
-
+ 
 @app.route("/<state>/sector")
 def statesector(state):
     state = state.lower()
@@ -134,7 +137,8 @@ def statesector(state):
 "Asian", "Pacific", "Professional", "Service", "Office", "Construction", "Production", 
 "PrivateWork", "PublicWork", "SelfEmployed", "FamilyWork", "Unemployment"  ]]
     print(sample_data)
-    data = {
+    data = {"Title":sample_data.Name.tolist()[0] + " Sector Diversity" ,
+    "data":{
        #"Name": sample_data.Name.values.tolist(),
        #"Abbreviation": sample_data.Abbreviation.values.tolist(),
     #    "State TaxRate": sample_data.TaxRate.tolist(),
@@ -143,7 +147,7 @@ def statesector(state):
        "% Self-Employed"  : sample_data.SelfEmployed.tolist()[0],
        "% Family Work"  : sample_data.FamilyWork.tolist()[0],
        
-       
+    }
 
 
    }
