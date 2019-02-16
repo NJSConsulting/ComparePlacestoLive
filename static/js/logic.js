@@ -70,23 +70,79 @@ var shpfile = new L.Shapefile('./static/data/shapefiles/cb_2017_us_state_20m.zip
     }
 });
 shpfile.addTo(myMap1);
-var shpfilecong = L.geoJSON();
 
-d3.json('./static/data/geojson/us-115th-congress-members.geojson').then(data => {
-    var myfeatures = []
-    data.features.forEach(feature => {
+
+
+function chooseColor(party) {
+    switch (party) {
+        case "Republican":
+        return "red";
+      case "Democratic":
+        return "blue";
+      default:
+        return "black";
+      }
+    }
+    var shpfilecong = L.geoJSON();
+    d3.json('./static/data/geojson/us-115th-congress-members.geojson').then(data => {
+        var myfeatures = []
+        console.log('in my feature')
+        data.features.forEach(feature => {
+            if (feature.properties.rep_sen === 'Representative'){
+                myfeatures.push(feature)
+            }
+        })
+        var newfeature = {
+            "type": "FeatureCollection",
+            "features":myfeatures
+        }
+    
+     shpfilecong = L.geoJSON(newfeature,{
+            onEachFeature: function(feature, layer) {
+            //    console.log(feature.properties)
+                if (feature.properties)
+                if (feature.properties.rep_sen === 'Representative'){ {
+                    layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+                        return k + ": " + feature.properties[k];
+                    }).join("<br />") , {
+                        maxHeight: 200
+                    }).on('click', function() { console.log(feature.properties) })
+             
+                         }         }
+            },
+            style: function(feature) {
+                return {
+                  color: "white",
+                  // Call the chooseColor function to decide which color to color our neighborhood (color based on borough)
+                  fillColor: chooseColor(feature.properties.party),
+                  fillOpacity: 0.5,
+                  weight: 1.5
+                };
+              },
+        })
+           
+        console.log('out my feature')
+    
+    })
+
+
+ var shpfilecong2 = L.geoJSON();
+d3.json('./static/data/geojson/us-115th-congress-members.geojson').then(data2 => {
+    console.log('in feature 2')
+    var myfeatures2 = []
+    data2.features.forEach(feature => {
         if (feature.properties.rep_sen === 'Representative'){
-            myfeatures.push(feature)
+            myfeatures2.push(feature)
         }
     })
-    var newfeature = {
+    var newfeature2 = {
         "type": "FeatureCollection",
-        "features":myfeatures
+        "features":myfeatures2
     }
 
-    shpfilecong = L.geoJSON(newfeature,{
+     shpfilecong2 = L.geoJSON(newfeature2,{
         onEachFeature: function(feature, layer) {
-            console.log(feature.properties)
+          //  console.log(feature.properties)
             if (feature.properties)
             if (feature.properties.rep_sen === 'Representative'){ {
                 layer.bindPopup(Object.keys(feature.properties).map(function(k) {
@@ -96,20 +152,25 @@ d3.json('./static/data/geojson/us-115th-congress-members.geojson').then(data => 
                 }).on('click', function() { console.log(feature.properties) })
          
                      }         }
-        }
+        },
+        style: function(feature) {
+            return {
+              color: "white",
+              // Call the chooseColor function to decide which color to color our neighborhood (color based on borough)
+              fillColor: chooseColor(feature.properties.party),
+              fillOpacity: 0.5,
+              weight: 1.5
+            };
+          },
     })
-        //L.geoJSON(data.features).addTo(map)
-        
-
+       
+   
+    console.log('out my feature2')
 })
-//var shpfilecong = new L.geoj('./static/data/shapefiles/cb_2017_us_cd115_500k.zip', {
-//    onEachFeature: function(feature, layer) {
-//        if (feature.properties) {
-            
-//        }
-    
- //   }
-//});
+
+
+
+
 
 var overlayMaps1 = {
     States: shpfile,
@@ -133,18 +194,6 @@ var shpfile2 = new L.Shapefile('./static/data/shapefiles/cb_2017_us_state_20m.zi
 });
 shpfile2.addTo(myMap2);
 
-var shpfilecong2 = new L.Shapefile('./static/data/shapefiles/cb_2017_us_cd115_500k.zip', {
-    onEachFeature: function(feature, layer) {
-        if (feature.properties) {
-            layer.bindPopup(Object.keys(feature.properties).map(function(k) {
-                return k + ": " + feature.properties[k];
-            }).join("<br />") , {
-                maxHeight: 200
-            }).on('click', function() { alert('Clicked on a member of the group!'); })
-     
-        }
-    }
-});
 
 
 var overlayMaps2 = {
@@ -161,6 +210,7 @@ myMap2.on('baselayerchange', d => {
     console.log('in layer change')
     if (d.name==='Congress'){
         console.log('Congress')
+        myMap2.addLayer(shpfilecong2)
         myMap1.addLayer(shpfilecong)
         myMap1.removeLayer(shpfile)
     }
@@ -177,6 +227,7 @@ myMap1.on('baselayerchange', d => {
     console.log('in layer change')
     if (d.name==='Congress'){
         console.log('Congress')
+        myMap1.addLayer(shpfilecong)
         myMap2.addLayer(shpfilecong2)
         myMap2.removeLayer(shpfile2)
     }
