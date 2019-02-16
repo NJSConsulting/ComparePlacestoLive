@@ -56,7 +56,7 @@ def statename(state):
    }
     return jsonify(data)
 
-@app.rout("/<state>/race")
+@app.route("/<state>/race")
 def statename(state):
     state = state.lower()
     print(type(state)) 
