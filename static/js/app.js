@@ -1,6 +1,6 @@
-function buildCharts(state) {
+function buildCharts(state,updatediv) {
 var url = `./${state}`;
-Plotly.newPlot('pie');
+Plotly.newPlot(updatediv);
     // @TODO: Build a Pie Chart
     // HINT: You will need to use slice() to grab the top 10 sample_values,
     // otu_ids, and labels (10 each).
@@ -11,7 +11,11 @@ Plotly.newPlot('pie');
         var pie_labels = Object.keys(data);
         console.log(Object.keys(data))
         // var pie_hover = data.otu_labels.slice(0,10);
-  
+        var layout = {
+          title: {
+            text:'Plot Title'
+          }}
+
         var data = [{
           values: pie_values,
           labels: pie_labels,
@@ -19,7 +23,7 @@ Plotly.newPlot('pie');
           type: 'pie'
         }];
   
-        Plotly.newPlot('pie', data);
+        Plotly.newPlot(updatediv, data, layout);
   
       });
     }
