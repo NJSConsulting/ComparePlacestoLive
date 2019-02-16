@@ -61,22 +61,55 @@ console.log ('starting shape file')
 var shpfile = new L.Shapefile('./static/data/shapefiles/cb_2017_us_state_20m.zip', {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
-
+             
                 layer.bindPopup('State: ' + feature.properties.NAME + '<br>Land Area: '+Math.floor(100 * feature.properties.ALAND / (feature.properties.ALAND + feature.properties.AWATER))  + '%<br><div class="selectstate" name="' + feature.properties.STUSPS + '">See Charts for this State</div><br>'), {
                     maxHeight: 200
-                }
+                
+            }
         }
     }
 });
 shpfile.addTo(myMap1);
-var shpfilecong = new L.Shapefile('./static/data/shapefiles/cb_2017_us_cd115_500k.zip', {
-    onEachFeature: function(feature, layer) {
-        if (feature.properties) {
-            
+var shpfilecong = L.geoJSON();
+
+d3.json('./static/data/geojson/us-115th-congress-members.geojson').then(data => {
+    var myfeatures = []
+    data.features.forEach(feature => {
+        if (feature.properties.rep_sen === 'Representative'){
+            myfeatures.push(feature)
         }
-    
+    })
+    var newfeature = {
+        "type": "FeatureCollection",
+        "features":myfeatures
     }
-});
+
+    shpfilecong = L.geoJSON(newfeature,{
+        onEachFeature: function(feature, layer) {
+            console.log(feature.properties)
+            if (feature.properties)
+            if (feature.properties.rep_sen === 'Representative'){ {
+                layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+                    return k + ": " + feature.properties[k];
+                }).join("<br />") , {
+                    maxHeight: 200
+                }).on('click', function() { console.log(feature.properties) })
+         
+                     }         }
+        }
+    })
+        //L.geoJSON(data.features).addTo(map)
+        
+
+})
+//var shpfilecong = new L.geoj('./static/data/shapefiles/cb_2017_us_cd115_500k.zip', {
+//    onEachFeature: function(feature, layer) {
+//        if (feature.properties) {
+            
+//        }
+    
+ //   }
+//});
 
 var overlayMaps1 = {
     States: shpfile,
