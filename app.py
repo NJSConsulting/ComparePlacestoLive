@@ -15,7 +15,7 @@ from flask import Response
 
 app = Flask(__name__)
 
-jsfile = file = open('./templates/shp.js', 'r')
+jsfile = open('./templates/shp.js', 'r')
 myjs = jsfile.read()
 df1 = pd.read_csv("data/shapefiles/State_wise_Tax_2019.csv")
 df2 = pd.read_csv("data/shapefiles/demographic_data.csv")
@@ -65,19 +65,88 @@ def staterace(state):
 "Asian", "Pacific", "Professional", "Service", "Office", "Construction", "Production", 
 "PrivateWork", "PublicWork", "SelfEmployed", "FamilyWork", "Unemployment"  ]]
     print(sample_data)
-    data = {
+    data = {"title": state + "Popluation by Race",
+      "data" : {
        #"Name": sample_data.Name.values.tolist(),
        #"Abbreviation": sample_data.Abbreviation.values.tolist(),
     #    "State TaxRate": sample_data.TaxRate.tolist(),
-       "% Hispanic": sample_data.Hispanice.tolist()[0],
+       "% Hispanic": sample_data.Hispanic.tolist()[0],
        "% White"  : sample_data.White.tolist()[0],
        "% Black" : sample_data.Black.tolist()[0],
        "% Native": sample_data.Native.tolist()[0],
        "% Asian" :  sample_data.Asian.tolist()[0],
        "% Pacific": sample_data.Pacific.tolist()[0]
+   }}
+    return jsonify(data)
+
+@app.route("/<state>/gender")
+def stategender(state):
+    state = state.lower()
+    print(type(state)) 
+    sample_data = df.loc[df['Abbreviation'] == state, ["Name", "Abbreviation", "TaxRate", "State_Tax","Fed_Tax","Social_Tax","Med_Tax",
+"Total_Tax_Ded","Total_Take_Home", "TotalPop", "Men", "Women", "Hispanic", "White", "Black", "Native", 
+"Asian", "Pacific", "Professional", "Service", "Office", "Construction", "Production", 
+"PrivateWork", "PublicWork", "SelfEmployed", "FamilyWork", "Unemployment"  ]]
+    print(sample_data)
+    data = {
+       #"Name": sample_data.Name.values.tolist(),
+       #"Abbreviation": sample_data.Abbreviation.values.tolist(),
+    #    "State TaxRate": sample_data.TaxRate.tolist(),
+       "% Men": sample_data.Men.tolist()[0],
+       "% Women"  : sample_data.Women.tolist()[0],
+
 
    }
     return jsonify(data)
+
+@app.route("/<state>/occupation")
+def stateoccupation(state):
+    state = state.lower()
+    print(type(state)) 
+    sample_data = df.loc[df['Abbreviation'] == state, ["Name", "Abbreviation", "TaxRate", "State_Tax","Fed_Tax","Social_Tax","Med_Tax",
+"Total_Tax_Ded","Total_Take_Home", "TotalPop", "Men", "Women", "Hispanic", "White", "Black", "Native", 
+"Asian", "Pacific", "Professional", "Service", "Office", "Construction", "Production", 
+"PrivateWork", "PublicWork", "SelfEmployed", "FamilyWork", "Unemployment"  ]]
+    print(sample_data)
+    data = {
+       #"Name": sample_data.Name.values.tolist(),
+       #"Abbreviation": sample_data.Abbreviation.values.tolist(),
+    #    "State TaxRate": sample_data.TaxRate.tolist(),
+       "% Professional": sample_data.Professional.tolist()[0],
+       "% Service"  : sample_data.Service.tolist()[0],
+       "% Office"  : sample_data.Office.tolist()[0],
+       "% Construction"  : sample_data.Construction.tolist()[0],
+       "% Production"  : sample_data.Production.tolist()[0],
+
+
+
+   }
+    return jsonify(data)
+
+@app.route("/<state>/sector")
+def statesector(state):
+    state = state.lower()
+    print(type(state)) 
+    sample_data = df.loc[df['Abbreviation'] == state, ["Name", "Abbreviation", "TaxRate", "State_Tax","Fed_Tax","Social_Tax","Med_Tax",
+"Total_Tax_Ded","Total_Take_Home", "TotalPop", "Men", "Women", "Hispanic", "White", "Black", "Native", 
+"Asian", "Pacific", "Professional", "Service", "Office", "Construction", "Production", 
+"PrivateWork", "PublicWork", "SelfEmployed", "FamilyWork", "Unemployment"  ]]
+    print(sample_data)
+    data = {
+       #"Name": sample_data.Name.values.tolist(),
+       #"Abbreviation": sample_data.Abbreviation.values.tolist(),
+    #    "State TaxRate": sample_data.TaxRate.tolist(),
+       "% Private Sector": sample_data.PrivateWork.tolist()[0],
+       "% Public Sector"  : sample_data.PublicWork.tolist()[0],
+       "% Self-Employed"  : sample_data.SelfEmployed.tolist()[0],
+       "% Family Work"  : sample_data.FamilyWork.tolist()[0],
+       
+       
+
+
+   }
+    return jsonify(data)
+
 
 
 if __name__ == "__main__":
