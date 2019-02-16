@@ -57,7 +57,7 @@ def statename(state):
     return jsonify(data)
 
 @app.route("/<state>/race")
-def statename(state):
+def staterace(state):
     state = state.lower()
     print(type(state)) 
     sample_data = df.loc[df['Abbreviation'] == state, ["Name", "Abbreviation", "TaxRate", "State_Tax","Fed_Tax","Social_Tax","Med_Tax",
