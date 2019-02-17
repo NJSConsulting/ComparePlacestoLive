@@ -35,7 +35,10 @@ Plotly.newPlot(updatediv);
           values: pie_values,
           labels: pie_labels,
         //   hovertext: pie_hover,
-          type: 'pie'
+          type: 'pie',
+          marker: {
+            colors: pie_labels.map(choosePieColor)
+          },
         }];
   
         Plotly.newPlot(updatediv, data, layout);
@@ -43,4 +46,54 @@ Plotly.newPlot(updatediv);
       });
     }
     
-   
+   function choosePieColor(label){
+    switch (label) {
+      case "% White":
+        return "red";
+      case "% Hispanic":
+        return "brown";
+      case "% Black":
+        return "green";
+      
+      case "% Asian":
+        return "yellow";
+      case "% Native":
+        return "blue";
+      case "% Pacific":
+        return "Orange";
+        case "Take Home for 100K USD":
+        return "green";
+        case "Federal tax for 100K":
+        return "red";
+        case "Social Security tax for 100K":
+        return "blue";
+        case "Medicare Witheld for 100K":
+        return "yellow";
+        case "State tax for 100K":
+        return "orange";
+        case "% Women":
+        return "pink";
+        case "% Men":
+        return "blue";
+        case "% Professional":
+        return "silver";
+        case "% Office":
+        return "grey";
+        case "% Service":
+        return "blue";
+        case "% Production":
+        return "green";
+        case "% Construction":
+        return "brown";
+        case "% Private Sector":
+        return "silver";
+        case "% Public Sector":
+        return "blue";
+        case "% Self-Employed":
+        return "green";
+        case "% Family Work":
+        return "red";
+    default:
+      return "black";
+    }
+   }
