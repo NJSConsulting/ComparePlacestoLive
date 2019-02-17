@@ -24,3 +24,8 @@ body {
 {
     cursor: pointer;
 }
+
+.dropdown-menu-center {
+    text-align: center !important;
+    
+  }

@@ -102,8 +102,8 @@ function chooseColor(party) {
             //    console.log(feature.properties)
                 if (feature.properties)
                 if (feature.properties.rep_sen === 'Representative'){ {
-                    layer.bindPopup(Object.keys(feature.properties).map(function(k) {
-                        return k + ": " + feature.properties[k];
+                    layer.bindPopup("Representative Name: " + feature.properties.name + "<br>District: " + feature.properties.district + "<br>State: " + feature.properties.state_label + "<br>Political Party: " + feature.properties.party + "<br>URL: <a href ='" + feature.properties.url + "'>" + feature.properties.url + " </a>"   + Object.keys(feature.properties).map(function(k) {
+                    
                     }).join("<br />") , {
                         maxHeight: 200
                     }).on('click', function() { console.log(feature.properties) })
@@ -145,8 +145,8 @@ d3.json('./static/data/geojson/us-115th-congress-members.geojson').then(data2 =>
           //  console.log(feature.properties)
             if (feature.properties)
             if (feature.properties.rep_sen === 'Representative'){ {
-                layer.bindPopup(Object.keys(feature.properties).map(function(k) {
-                    return k + ": " + feature.properties[k];
+                layer.bindPopup("Representative Name: " + feature.properties.name + "<br>District: " + feature.properties.district + "<br>State: " + feature.properties.state_label + "<br>Political Party: " + feature.properties.party + "<br>URL: <a href ='" + feature.properties.url + "'>" + feature.properties.url + " </a>" + Object.keys(feature.properties).map(function(k) {
+                    
                 }).join("<br />") , {
                     maxHeight: 200
                 }).on('click', function() { console.log(feature.properties) })
