@@ -150,7 +150,7 @@ function LoadMaps(Map1Cong, Map2Cong,Map1State,Map2State){
     myMap1.keyboard.disable();
     var myMap2 = L.map("map2", {
         center: [37.09, -95.71],
-        zoom: 4,
+        zoom: 4
     });
     myMap2.touchZoom.disable();
     myMap2.doubleClickZoom.disable();
@@ -177,11 +177,18 @@ function LoadMaps(Map1Cong, Map2Cong,Map1State,Map2State){
     var overlayMaps2 = {
         States: Map2State,
         Congress: Map2Cong
-      };
+    };
+
+    Map1State.addTo(myMap1)
+    Map2State.addTo(myMap2)
+
+
 
     
     var clayer2 = new L.control.layers(overlayMaps2, null).addTo(myMap2);
     
+
+
     var selectedlayers2 = clayer2.getOverlays()
     
 
