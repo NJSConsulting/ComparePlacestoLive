@@ -17,8 +17,11 @@ app = Flask(__name__)
 
 jsfile = open('./templates/shp.js', 'r')
 myjs = jsfile.read()
-df1 = pd.read_csv("data/shapefiles/State_wise_Tax_2019.csv")
-df2 = pd.read_csv("data/shapefiles/demographic_data.csv")
+engine = create_engine('sqlite:///./data/PlacesData.db')
+df1 = pd.read_sql('select * from State_wise_Tax_2019', con=engine)
+df2 = pd.read_sql('select * from demographic_data', con=engine)
+
+
 df = pd.merge(df1, df2, how='inner', on='Name')
 
 
