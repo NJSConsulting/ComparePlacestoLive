@@ -44,7 +44,7 @@ function LoadLayers(congressgeojson){
             if (feature.properties){
                 if (feature.properties.rep_sen === 'Representative'){ 
                     layer.bindPopup("Representative Name: " + feature.properties.name + "<br>District: " + feature.properties.district + "<br>State: " 
-                    + feature.properties.state_label + "<br>Political Party: " + feature.properties.party + "<br>URL: <a href ='" + feature.properties.url + "'>" 
+                    + feature.properties.state_label + "<br>Political Party: " + feature.properties.party + "<br>URL: <a target='_blank' href ='" + feature.properties.url + "'>" 
                     + feature.properties.url + " </a>"  , {maxHeight: 200}).on('click', function() { console.log(feature.properties) })
             
                 }
@@ -66,7 +66,7 @@ function LoadLayers(congressgeojson){
             if (feature.properties){
                 if (feature.properties.rep_sen === 'Representative'){ 
                     layer.bindPopup("Representative Name: " + feature.properties.name + "<br>District: " + feature.properties.district + "<br>State: " 
-                    + feature.properties.state_label + "<br>Political Party: " + feature.properties.party + "<br>URL: <a href ='" + feature.properties.url + "'>" 
+                    + feature.properties.state_label + "<br>Political Party: " + feature.properties.party + "<br>URL: <a  target='_blank' href ='" + feature.properties.url + "'>" 
                     + feature.properties.url + " </a>"  , {maxHeight: 200}).on('click', function() { console.log(feature.properties) })
             
                 }
